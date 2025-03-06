@@ -16,5 +16,9 @@ Where:
 - k = current bucket
 - init = initial (e.g Rinit = initial price)
 
-This formula works so that each bucket has a progressively higher price.
+This formula works so that each bucket has a progressively higher price. Price in this context is just the amount of tokens purchased per SOL commited.
+
+SOL is transferred directly to the authority's wallet.
+
+Users can commit across multiple buckets, in which case, their purchased tokens will be filled at different prices.
 ​
