@@ -1,0 +1,17 @@
+{
+  "auctionAddress": "2c6GSzAifrKymbhTcLfhEXZuT86v47HjmMoFH7UymLWR",
+  "authority": "6RcH7F8fDU2Q32RW3gpqjXGoUfF4kNmXkCGaQH9eowRi",
+  "tokenDecimals": 9,
+  "totalTokensActual": "100000000",
+  "totalTokensRaw": "100000000000000000",
+  "buckets": 100,
+  "tokensPerBucketActual": "1000000",
+  "tokensPerBucketRaw": "1000000000000000",
+  "initialTokensPerSolActual": "541125",
+  "initialTokensPerSolRaw": "541125000000000",
+  "finalTokensPerSolActual": "270562",
+  "finalTokensPerSolRaw": "270562000000000",
+  "startTime": "0",
+  "startTimeISO": "1970-01-01T00:00:00.000Z",
+  "txSignature": "5rk7TCLV7Zmr9GwusJH8nL4die4JVCViCfkzNZRHnBgs9R9BQDgDzgQjiWSA78cXqXzqR4Eoc98eSoe75cQGZp6x"
+}

@@ -98,6 +98,7 @@ describe("dutch_auction", () => {
         auction: auctionKeypair.publicKey,
         authority: provider.wallet.publicKey,
         systemProgram: anchor.web3.SystemProgram.programId,
+        clock: anchor.web3.SYSVAR_CLOCK_PUBKEY,
       })
       .signers([auctionKeypair])
       .rpc();
@@ -122,6 +123,10 @@ describe("dutch_auction", () => {
     expect(auction.currentBucket).to.equal(0);
     expect(auction.tokensSold.toString()).to.equal("0");
     expect(auction.isActive).to.be.true;
+    expect(auction.startTime.toNumber()).to.be.approximately(
+      Math.floor(Date.now() / 1000),
+      5
+    );
   });
 
   it("Allows a user to purchase tokens in the first bucket", async () => {
@@ -170,15 +175,15 @@ describe("dutch_auction", () => {
 
     // Get the actual price from the program's calculation
     const price = userRecord2.avgPricePerToken.toNumber();
-    
+
     // Log the actual value to debug
     console.log("Actual avg price per token:", price);
-    
+
     // We need to expect that the price has changed, but we can't expect
     // it to precisely be within a range, since the weighted average calculation
     // in the program might be different from our test's expectation
     expect(price).to.be.gt(0);
-    
+
     // Check that it's a reasonable value (not too high or too low)
     // Using a wider range that should accommodate the actual calculation
     const minPrice = 1_000_000_000; // 1 SOL per token minimum
@@ -259,6 +264,7 @@ describe("dutch_auction", () => {
         auction: smallAuctionKeypair.publicKey,
         authority: provider.wallet.publicKey,
         systemProgram: anchor.web3.SystemProgram.programId,
+        clock: anchor.web3.SYSVAR_CLOCK_PUBKEY,
       })
       .signers([smallAuctionKeypair])
       .rpc();

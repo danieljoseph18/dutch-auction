@@ -11,10 +11,11 @@ pub struct Auction {
     pub current_bucket: u8,
     pub tokens_sold: u64,
     pub is_active: bool,
+    pub start_time: i64,
 }
 
 impl Auction {
-    pub const SIZE: usize = 32 + 8 + 1 + 8 + 8 + 8 + 1 + 8 + 1;
+    pub const SIZE: usize = 32 + 8 + 1 + 8 + 8 + 8 + 1 + 8 + 1 + 8;
 }
 
 #[account]

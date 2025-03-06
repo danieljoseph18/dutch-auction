@@ -8,6 +8,7 @@ pub struct Initialize<'info> {
     #[account(mut)]
     pub authority: Signer<'info>,
     pub system_program: Program<'info, System>,
+    pub clock: Sysvar<'info, Clock>,
 }
 
 pub fn initialize(
@@ -28,6 +29,7 @@ pub fn initialize(
     auction.current_bucket = 0;
     auction.tokens_sold = 0;
     auction.is_active = true;
+    auction.start_time = ctx.accounts.clock.unix_timestamp;
 
     Ok(())
 }
