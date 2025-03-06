@@ -40,9 +40,17 @@ pub fn purchase(ctx: Context<Purchase>, amount_sol: u64) -> Result<()> {
         ErrorCode::InsufficientFunds
     );
 
-    // Transfer SOL from user to auction authority
-    **ctx.accounts.user.try_borrow_mut_lamports()? -= sol_required;
-    **ctx.accounts.auction_wallet.try_borrow_mut_lamports()? += sol_required;
+    // Transfer SOL from user to auction authority using system program
+    anchor_lang::system_program::transfer(
+        CpiContext::new(
+            ctx.accounts.system_program.to_account_info(),
+            anchor_lang::system_program::Transfer {
+                from: ctx.accounts.user.to_account_info(),
+                to: ctx.accounts.auction_wallet.to_account_info(),
+            },
+        ),
+        sol_required,
+    )?;
 
     // Update user record with weighted average price
     let old_total = user_record.tokens_purchased;
